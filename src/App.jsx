@@ -1,90 +1,53 @@
-import { useState, useEffect } from 'react'
-import './App.css'
+import { Suspense, lazy } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { AuthProvider } from './context/AuthContext'
+import { AppProvider } from './context/AppContext'
+import Header from './components/common/Header'
+import Footer from './components/common/Footer'
+import LoadingSpinner from './components/common/LoadingSpinner'
+
+// Lazy loading por ruta — solo se carga el JS cuando se navega a la página
+const Home          = lazy(() => import('./pages/Home'))
+const TallerDetail  = lazy(() => import('./pages/TallerDetail'))
+const ProfesorDetail = lazy(() => import('./pages/ProfesorDetail'))
+const Login         = lazy(() => import('./pages/Login'))
+const Signup        = lazy(() => import('./pages/Signup'))
+const Dashboard     = lazy(() => import('./pages/Dashboard'))
+
+// Fallback de carga compartido para todas las rutas
+const CargandoPagina = () => <LoadingSpinner fullPage mensaje="Cargando página…" />
 
 export default function App() {
-  const [talleres, setTalleres] = useState([])
-  const [distritos, setDistritos] = useState([])
-  const [filtros, setFiltros] = useState({
-    distrito: '',
-    nivel: '',
-    tipo: '',
-    precio_max: ''
-  })
-  const [cargando, setCargando] = useState(false)
-  const [error, setError] = useState(null)
-
-  const API_URL = 'https://teatro-hub-backend.onrender.com/api/v1'
-
-  useEffect(() => {
-    fetch(`${API_URL}/distritos`)
-      .then(res => res.json())
-      .then(data => setDistritos(data.data))
-      .catch(err => console.error('Error:', err))
-  }, [])
-
-  const buscarTalleres = async () => {
-    setCargando(true)
-    setError(null)
-    try {
-      const params = new URLSearchParams()
-      if (filtros.distrito) params.append('distrito', filtros.distrito)
-      if (filtros.nivel) params.append('nivel', filtros.nivel)
-      if (filtros.tipo) params.append('tipo', filtros.tipo)
-      if (filtros.precio_max) params.append('precio_max', filtros.precio_max)
-
-      const res = await fetch(`${API_URL}/talleres?${params}`)
-      const data = await res.json()
-      setTalleres(data.data || [])
-    } catch (err) {
-      setError('Error: ' + err.message)
-    } finally {
-      setCargando(false)
-    }
-  }
-
-  const handleFiltroChange = (e) => {
-    const { name, value } = e.target
-    setFiltros(prev => ({ ...prev, [name]: value }))
-  }
-
   return (
-    <div className="container">
-      <header className="header">
-        <h1>🎭 TeatroHub</h1>
-        <p>Descubre talleres de teatro en Madrid</p>
-      </header>
+    <BrowserRouter>
+      <AppProvider>
+        <AuthProvider>
+          <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+            <Header />
 
-      <form onSubmit={(e) => { e.preventDefault(); buscarTalleres() }} className="search-form">
-        <select name="distrito" value={filtros.distrito} onChange={handleFiltroChange}>
-          <option value="">Distrito</option>
-          {distritos.map(d => <option key={d} value={d}>{d}</option>)}
-        </select>
+            <Suspense fallback={<CargandoPagina />}>
+              <Routes>
+                <Route path="/"             element={<Home />} />
+                <Route path="/taller/:id"   element={<TallerDetail />} />
+                <Route path="/profesor/:id" element={<ProfesorDetail />} />
+                <Route path="/login"        element={<Login />} />
+                <Route path="/signup"       element={<Signup />} />
+                <Route path="/dashboard"    element={<Dashboard />} />
 
-        <select name="nivel" value={filtros.nivel} onChange={handleFiltroChange}>
-          <option value="">Nivel</option>
-          <option value="principiante">Principiante</option>
-          <option value="intermedio">Intermedio</option>
-          <option value="avanzado">Avanzado</option>
-        </select>
+                {/* 404 — Semana 2: crear página NotFound dedicada */}
+                <Route path="*" element={
+                  <div style={{ textAlign: 'center', padding: '96px 24px' }}>
+                    <span style={{ fontSize: '4rem', display: 'block', marginBottom: '16px' }}>🎭</span>
+                    <h2>Página no encontrada</h2>
+                  </div>
+                } />
+              </Routes>
+            </Suspense>
 
-        <input type="number" name="precio_max" placeholder="Precio max" value={filtros.precio_max} onChange={handleFiltroChange} />
-
-        <button type="submit" disabled={cargando}>{cargando ? 'Buscando...' : 'Buscar'}</button>
-      </form>
-
-      {error && <p className="error">{error}</p>}
-
-      <div className="results">
-        {talleres.map(t => (
-          <div key={t.id} className="card">
-            <h3>{t.nombre}</h3>
-            <p>{t.descripcion}</p>
-            <p><strong>Distrito:</strong> {t.ubicacion_distrito}</p>
-            <p><strong>Precio:</strong> €{t.precio_mensual}/mes</p>
-            <p><strong>Plazas:</strong> {t.plazas_disponibles}/{t.plazas_total}</p>
+            <Footer />
           </div>
-        ))}
-      </div>
-    </div>
+        </AuthProvider>
+      </AppProvider>
+    </BrowserRouter>
   )
 }
