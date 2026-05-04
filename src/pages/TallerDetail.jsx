@@ -7,6 +7,9 @@ import Badge from '../components/common/Badge'
 import { talleresService } from '../services/talleres'
 import { formatPrecio } from '../utils/helpers'
 
+// Color de acento fijo para la página de detalle — púrpura principal
+const COLOR_ACENTO = theme.colors.palette[0]
+
 // TODO Semana 2: agregar sección de reseñas y perfil del profesor
 export default function TallerDetail() {
   const { id } = useParams()
@@ -50,7 +53,9 @@ export default function TallerDetail() {
     >
       {/* Enlace de vuelta */}
       <Link to="/" style={{
-        display: 'inline-flex', alignItems: 'center', gap: '6px',
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '6px',
         color: theme.colors.textMuted,
         fontSize: theme.typography.sizes.sm,
         marginBottom: theme.spacing.lg,
@@ -61,22 +66,20 @@ export default function TallerDetail() {
       </Link>
 
       <div style={{
-        background: theme.colors.surface,
+        background: theme.colors.white,
         borderRadius: theme.borderRadius.xl,
         boxShadow: theme.shadow.lg,
         overflow: 'hidden',
         border: `1px solid ${theme.colors.border}`,
+        borderLeft: `4px solid ${COLOR_ACENTO.border}`,
       }}>
-        {/* Franja superior de color de marca */}
-        <div style={{ height: '8px', background: theme.colors.gradientWarm }} />
-
         <div style={{ padding: theme.spacing.xl }}>
           {/* Cabecera */}
           <div style={{ marginBottom: theme.spacing.lg }}>
             <h1 style={{
               fontFamily: theme.typography.fontFamilyDisplay,
               fontSize: theme.typography.sizes['3xl'],
-              fontWeight: theme.typography.weights.bold,
+              fontWeight: theme.typography.weights.semibold,
               color: theme.colors.textPrimary,
               marginBottom: theme.spacing.sm,
               lineHeight: theme.typography.lineHeights.tight,
@@ -86,7 +89,19 @@ export default function TallerDetail() {
 
             <div style={{ display: 'flex', gap: theme.spacing.sm, flexWrap: 'wrap' }}>
               {nivel && <Badge nivel={nivel} />}
-              <Badge color="secondary">📍 {ubicacion_distrito}</Badge>
+              <span style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px',
+                padding: '2px 10px',
+                borderRadius: theme.borderRadius.full,
+                fontSize: theme.typography.sizes.xs,
+                fontWeight: theme.typography.weights.semibold,
+                background: COLOR_ACENTO.bgLight,
+                color: COLOR_ACENTO.textDark,
+              }}>
+                📍 {ubicacion_distrito}
+              </span>
             </div>
           </div>
 
@@ -100,7 +115,7 @@ export default function TallerDetail() {
             {descripcion}
           </p>
 
-          {/* Precio en dorado (accent) + CTA */}
+          {/* Precio + CTA */}
           <div style={{
             display: 'flex',
             alignItems: 'center',
@@ -112,9 +127,10 @@ export default function TallerDetail() {
           }}>
             <div>
               <span style={{
+                fontFamily: theme.typography.fontFamilyDisplay,
                 fontSize: theme.typography.sizes['4xl'],
-                fontWeight: theme.typography.weights.bold,
-                color: theme.colors.accent,
+                fontWeight: theme.typography.weights.semibold,
+                color: COLOR_ACENTO.border,
               }}>
                 {formatPrecio(precio_mensual)}
               </span>

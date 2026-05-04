@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer style={{
       background: theme.colors.black,
-      color: theme.colors.textMuted,
+      color: theme.colors.grayLight,
       marginTop: 'auto',
     }}>
       <div className="container" style={{
@@ -16,27 +16,19 @@ export default function Footer() {
         gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
         gap: theme.spacing.xl,
       }}>
-        {/* Marca */}
+        {/* Marca — Playfair Display, sin emoji */}
         <div>
-          <div style={{
-            display: 'flex', alignItems: 'center',
-            gap: theme.spacing.sm,
+          <span style={{
+            fontFamily: theme.typography.fontFamilyDisplay,
+            color: theme.colors.white,
+            fontWeight: theme.typography.weights.semibold,
+            fontSize: theme.typography.sizes.lg,
+            display: 'block',
             marginBottom: theme.spacing.sm,
+            letterSpacing: theme.typography.letterSpacing.tight,
           }}>
-            <span style={{ fontSize: theme.typography.sizes.xl }}>🎭</span>
-            <span style={{
-              fontFamily: theme.typography.fontFamilyDisplay,
-              color: theme.colors.white,
-              fontWeight: theme.typography.weights.bold,
-              fontSize: theme.typography.sizes.lg,
-              background: theme.colors.gradientWarm,
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
-              TeatroHub
-            </span>
-          </div>
+            TeatroHub
+          </span>
           <p style={{
             fontSize: theme.typography.sizes.sm,
             lineHeight: theme.typography.lineHeights.relaxed,
@@ -45,14 +37,14 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* Links */}
+        {/* Links de navegación */}
         <div>
           <h4 style={{
             color: theme.colors.white,
             marginBottom: theme.spacing.md,
-            fontSize: theme.typography.sizes.sm,
+            fontSize: theme.typography.sizes.xs,
             fontWeight: theme.typography.weights.semibold,
-            letterSpacing: theme.typography.letterSpacing.wider,
+            letterSpacing: theme.typography.letterSpacing.widest,
             textTransform: 'uppercase',
           }}>
             Plataforma
@@ -67,13 +59,13 @@ export default function Footer() {
                 <Link
                   to={ruta}
                   style={{
-                    color: theme.colors.textMuted,
+                    color: theme.colors.grayLight,
                     fontSize: theme.typography.sizes.sm,
                     textDecoration: 'none',
                     transition: `color ${theme.transition.fast}`,
                   }}
-                  onMouseEnter={e => e.target.style.color = theme.colors.accent}
-                  onMouseLeave={e => e.target.style.color = theme.colors.textMuted}
+                  onMouseEnter={e => e.target.style.color = theme.colors.white}
+                  onMouseLeave={e => e.target.style.color = theme.colors.grayLight}
                 >
                   {etiqueta}
                 </Link>
@@ -85,14 +77,14 @@ export default function Footer() {
 
       {/* Copyright */}
       <div style={{
-        borderTop: `1px solid rgba(255,255,255,0.08)`,
-        padding: `${theme.spacing.lg} ${theme.spacing.lg}`,
+        borderTop: '1px solid rgba(255,255,255,0.08)',
+        padding: `${theme.spacing.md} ${theme.spacing.lg}`,
         textAlign: 'center',
         fontSize: theme.typography.sizes.xs,
-        color: theme.colors.grayLight,
+        color: '#666',
       }}>
         <div className="container">
-          © {anio} TeatroHub · Hecho con ❤️ en Madrid
+          © {anio} TeatroHub · Madrid
         </div>
       </div>
     </footer>

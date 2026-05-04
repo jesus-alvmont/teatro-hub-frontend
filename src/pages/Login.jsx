@@ -23,30 +23,35 @@ export default function Login() {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: '40px 24px',
-      background: theme.colors.gradientSubtle,
+      padding: `${theme.spacing['3xl']} ${theme.spacing.lg}`,
+      background: theme.colors.white,
     }}>
       <div style={{
         width: '100%',
-        maxWidth: '440px',
-        background: theme.colors.surface,
-        borderRadius: theme.radius.xl,
+        maxWidth: '420px',
+        background: theme.colors.white,
+        borderRadius: theme.borderRadius.xl,
         boxShadow: theme.shadow.xl,
-        padding: '40px',
+        padding: theme.spacing['2xl'],
         border: `1px solid ${theme.colors.border}`,
+        borderTop: `4px solid ${theme.colors.primary}`,
       }}>
-        {/* Logo */}
-        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-          <span style={{ fontSize: '2.5rem' }}>🎭</span>
+        {/* Encabezado */}
+        <div style={{ marginBottom: theme.spacing.xl }}>
           <h1 style={{
-            fontSize: theme.typography.size['2xl'],
-            fontWeight: theme.typography.weight.bold,
+            fontFamily: theme.typography.fontFamilyDisplay,
+            fontSize: theme.typography.sizes['2xl'],
+            fontWeight: theme.typography.weights.semibold,
             color: theme.colors.textPrimary,
-            marginTop: '8px',
+            marginBottom: theme.spacing.xs,
+            lineHeight: theme.typography.lineHeights.tight,
           }}>
             Bienvenido de nuevo
           </h1>
-          <p style={{ color: theme.colors.textMuted, fontSize: theme.typography.size.sm, marginTop: '4px' }}>
+          <p style={{
+            color: theme.colors.textMuted,
+            fontSize: theme.typography.sizes.sm,
+          }}>
             Entra para gestionar tus talleres
           </p>
         </div>
@@ -55,12 +60,15 @@ export default function Login() {
 
         <p style={{
           textAlign: 'center',
-          marginTop: '24px',
-          fontSize: theme.typography.size.sm,
+          marginTop: theme.spacing.lg,
+          fontSize: theme.typography.sizes.sm,
           color: theme.colors.textMuted,
         }}>
           ¿No tienes cuenta?{' '}
-          <Link to="/signup" style={{ color: theme.colors.primary, fontWeight: theme.typography.weight.semibold }}>
+          <Link to="/signup" style={{
+            color: theme.colors.primary,
+            fontWeight: theme.typography.weights.semibold,
+          }}>
             Regístrate gratis
           </Link>
         </p>

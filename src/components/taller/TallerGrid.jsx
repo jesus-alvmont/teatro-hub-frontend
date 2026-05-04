@@ -15,19 +15,12 @@ export default function TallerGrid({ talleres = [], cargando, error, onReintenta
       padding: `${theme.spacing['3xl']} ${theme.spacing.lg}`,
       color: theme.colors.textMuted,
     }}>
-      <span style={{
-        fontSize: theme.typography.sizes['4xl'],
-        display: 'block',
-        marginBottom: theme.spacing.md,
-      }}>
-        🎭
-      </span>
       <h3 style={{
         fontFamily: theme.typography.fontFamilyDisplay,
         fontSize: theme.typography.sizes.xl,
         color: theme.colors.textSecondary,
         marginBottom: theme.spacing.sm,
-        fontWeight: theme.typography.weights.bold,
+        fontWeight: theme.typography.weights.semibold,
       }}>
         No encontramos talleres
       </h3>
@@ -44,7 +37,8 @@ export default function TallerGrid({ talleres = [], cargando, error, onReintenta
         fontSize: theme.typography.sizes.sm,
         color: theme.colors.textMuted,
         marginBottom: theme.spacing.lg,
-        fontWeight: theme.typography.weights.medium,
+        fontWeight: theme.typography.weights.semibold,
+        letterSpacing: theme.typography.letterSpacing.wide,
       }}>
         {talleres.length} {talleres.length === 1 ? 'taller encontrado' : 'talleres encontrados'}
       </p>
@@ -58,9 +52,10 @@ export default function TallerGrid({ talleres = [], cargando, error, onReintenta
           <div
             key={taller.id}
             className="animate-in"
-            style={{ animationDelay: `${i * 60}ms` }}
+            style={{ animationDelay: `${i * 50}ms` }}
           >
-            <TallerCard taller={taller} />
+            {/* colorIndex asigna el color de la paleta cíclicamente */}
+            <TallerCard taller={taller} colorIndex={i} />
           </div>
         ))}
       </div>

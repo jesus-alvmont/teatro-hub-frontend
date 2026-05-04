@@ -10,7 +10,7 @@ const estiloSelect = {
   borderRadius: theme.borderRadius.md,
   fontSize: theme.typography.sizes.sm,
   color: theme.colors.textPrimary,
-  background: theme.colors.surface,
+  background: theme.colors.white,
   outline: 'none',
   fontFamily: theme.typography.fontFamily,
   transition: `border-color ${theme.transition.fast}`,
@@ -26,9 +26,9 @@ function Campo({ label, children }) {
       <label style={{
         fontSize: theme.typography.sizes.xs,
         fontWeight: theme.typography.weights.semibold,
-        color: theme.colors.textSecondary,
+        color: theme.colors.textMuted,
         textTransform: 'uppercase',
-        letterSpacing: theme.typography.letterSpacing.wider,
+        letterSpacing: theme.typography.letterSpacing.widest,
       }}>
         {label}
       </label>
@@ -65,11 +65,11 @@ export default function SearchForm({ distritos = [], cargando = false, onBuscar 
     <form
       onSubmit={handleSubmit}
       style={{
-        background: theme.colors.surface,
+        background: theme.colors.white,
         borderRadius: theme.borderRadius.xl,
         padding: theme.spacing.lg,
         boxShadow: theme.shadow.xl,
-        border: `1px solid ${theme.colors.borderSubtle}`,
+        border: `1px solid ${theme.colors.border}`,
       }}
     >
       <div style={{
@@ -119,7 +119,7 @@ export default function SearchForm({ distritos = [], cargando = false, onBuscar 
           </Button>
         )}
         <Button variante="primary" tamano="md" type="submit" cargando={cargando}>
-          🔍 Buscar talleres
+          Buscar talleres
         </Button>
       </div>
     </form>

@@ -16,7 +16,7 @@ export default function LoadingSpinner({ mensaje = 'Cargando…', fullPage = fal
         ...(fullPage && { minHeight: '60vh' }),
       }}
     >
-      <svg width="40" height="40" viewBox="0 0 40 40" style={{ animation: 'spin 0.8s linear infinite' }}>
+      <svg width="36" height="36" viewBox="0 0 40 40" style={{ animation: 'spin 0.8s linear infinite' }}>
         <circle
           cx="20" cy="20" r="16"
           fill="none"
@@ -35,7 +35,7 @@ export default function LoadingSpinner({ mensaje = 'Cargando…', fullPage = fal
       <p style={{
         color: theme.colors.textMuted,
         fontSize: theme.typography.sizes.sm,
-        fontWeight: theme.typography.weights.medium,
+        fontWeight: theme.typography.weights.semibold,
       }}>
         {mensaje}
       </p>

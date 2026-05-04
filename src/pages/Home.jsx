@@ -4,21 +4,40 @@ import SearchForm from '../components/search/SearchForm'
 import TallerGrid from '../components/taller/TallerGrid'
 import { useTalleres } from '../hooks/useTalleres'
 
-// Sección hero: gradiente coral + tipografía display Playfair
+// Barras de color decorativas que representan la paleta de la app
+const BARRAS_COLOR = ['#7B68A6', '#E89BB5', '#F4D03F', '#6B8C7E', '#E74C3C', '#5B7C9F']
+
+// Sección hero — editorial, fondo blanco, tipografía de impacto
 function Hero() {
   return (
     <section style={{
-      background: theme.colors.gradientHero,
-      color: theme.colors.textInverse,
-      // El padding inferior extra crea espacio para que el SearchForm se superponga
+      background: theme.colors.white,
       padding: `${theme.spacing['4xl']} ${theme.spacing.lg} 80px`,
       textAlign: 'center',
     }}>
       <div className="container">
+        {/* Barras de color decorativas */}
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '6px',
+          marginBottom: theme.spacing.xl,
+        }}>
+          {BARRAS_COLOR.map(color => (
+            <div key={color} style={{
+              width: '32px',
+              height: '4px',
+              borderRadius: theme.borderRadius.full,
+              background: color,
+            }} />
+          ))}
+        </div>
+
         <h1 style={{
           fontFamily: theme.typography.fontFamilyDisplay,
-          fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-          fontWeight: theme.typography.weights.bold,
+          fontSize: 'clamp(2.25rem, 5.5vw, 3.75rem)',
+          fontWeight: theme.typography.weights.semibold,
+          color: theme.colors.black,
           lineHeight: theme.typography.lineHeights.tight,
           marginBottom: theme.spacing.md,
           letterSpacing: theme.typography.letterSpacing.tight,
@@ -26,24 +45,16 @@ function Hero() {
           Descubre talleres de teatro<br />en Madrid
         </h1>
 
-        {/* Línea dorada decorativa */}
-        <div style={{
-          width: '60px',
-          height: '3px',
-          background: theme.colors.accent,
-          borderRadius: theme.borderRadius.full,
-          margin: `0 auto ${theme.spacing.md}`,
-        }} />
-
         <p style={{
-          fontSize: theme.typography.sizes.xl,
-          opacity: 0.85,
-          maxWidth: '560px',
-          margin: '0 auto',
+          fontSize: theme.typography.sizes.lg,
+          color: theme.colors.textSecondary,
+          maxWidth: '520px',
+          margin: `0 auto`,
           lineHeight: theme.typography.lineHeights.relaxed,
           fontWeight: theme.typography.weights.normal,
         }}>
-          Más de 50 talleres para todos los niveles.<br />Encuentra el que mejor encaja contigo.
+          Más de 50 talleres para todos los niveles.
+          Encuentra el que mejor encaja contigo.
         </p>
       </div>
     </section>
@@ -60,9 +71,9 @@ export default function Home() {
     <>
       <Hero />
 
-      <main style={{ flex: 1, background: theme.colors.backgrounds.coral }}>
+      <main style={{ flex: 1, background: theme.colors.white }}>
         <div className="container" style={{ padding: `0 ${theme.spacing.lg} ${theme.spacing['3xl']}` }}>
-          {/* SearchForm superpuesto al hero (-56px = entra en la zona del hero) */}
+          {/* SearchForm superpuesto sobre la zona inferior del hero */}
           <div style={{ marginTop: '-56px', marginBottom: theme.spacing['2xl'] }}>
             <SearchForm
               distritos={distritos}

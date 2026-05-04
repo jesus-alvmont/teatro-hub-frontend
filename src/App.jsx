@@ -14,14 +14,12 @@ const ProfesorDetail = lazy(() => import('./pages/ProfesorDetail'))
 const Login          = lazy(() => import('./pages/Login'))
 const Signup         = lazy(() => import('./pages/Signup'))
 const Dashboard      = lazy(() => import('./pages/Dashboard'))
-
-// Página de referencia visual del Design System (solo desarrollo)
 const DesignSystemDemo = lazy(() => import('./components/common/DesignSystemDemo'))
 
 // Fallback de carga compartido para todas las rutas
 const CargandoPagina = () => <LoadingSpinner fullPage mensaje="Cargando página…" />
 
-// Página 404 en línea — sustituir por página dedicada en Semana 2
+// Página 404 — sustituir por página dedicada en Semana 2
 function PaginaNoEncontrada() {
   return (
     <div style={{
@@ -29,16 +27,10 @@ function PaginaNoEncontrada() {
       padding: `${theme.spacing['4xl']} ${theme.spacing.lg}`,
       flex: 1,
     }}>
-      <span style={{
-        fontSize: theme.typography.sizes['5xl'],
-        display: 'block',
-        marginBottom: theme.spacing.md,
-      }}>
-        🎭
-      </span>
       <h2 style={{
         fontFamily: theme.typography.fontFamilyDisplay,
-        fontSize: theme.typography.sizes['2xl'],
+        fontSize: theme.typography.sizes['3xl'],
+        fontWeight: theme.typography.weights.semibold,
         color: theme.colors.textPrimary,
         marginBottom: theme.spacing.sm,
       }}>

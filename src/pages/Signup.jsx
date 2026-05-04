@@ -1,14 +1,14 @@
 import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import theme from '../styles/theme'
 import SignupForm from '../components/auth/SignupForm'
 import { useAuth } from '../hooks/useAuth'
 import { authService } from '../services/auth'
-import { useState } from 'react'
 
 // TODO Semana 3: validación de contraseña y verificación de email
 export default function Signup() {
   const { login } = useAuth()
-  const navigate = useNavigate()
+  const navigate  = useNavigate()
   const [cargando, setCargando] = useState(false)
   const [error, setError]       = useState(null)
 
@@ -33,29 +33,35 @@ export default function Signup() {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: '40px 24px',
-      background: theme.colors.gradientSubtle,
+      padding: `${theme.spacing['3xl']} ${theme.spacing.lg}`,
+      background: theme.colors.white,
     }}>
       <div style={{
         width: '100%',
-        maxWidth: '440px',
-        background: theme.colors.surface,
-        borderRadius: theme.radius.xl,
+        maxWidth: '420px',
+        background: theme.colors.white,
+        borderRadius: theme.borderRadius.xl,
         boxShadow: theme.shadow.xl,
-        padding: '40px',
+        padding: theme.spacing['2xl'],
         border: `1px solid ${theme.colors.border}`,
+        borderTop: `4px solid ${theme.colors.pink}`,
       }}>
-        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-          <span style={{ fontSize: '2.5rem' }}>🎭</span>
+        {/* Encabezado */}
+        <div style={{ marginBottom: theme.spacing.xl }}>
           <h1 style={{
-            fontSize: theme.typography.size['2xl'],
-            fontWeight: theme.typography.weight.bold,
+            fontFamily: theme.typography.fontFamilyDisplay,
+            fontSize: theme.typography.sizes['2xl'],
+            fontWeight: theme.typography.weights.semibold,
             color: theme.colors.textPrimary,
-            marginTop: '8px',
+            marginBottom: theme.spacing.xs,
+            lineHeight: theme.typography.lineHeights.tight,
           }}>
             Únete a TeatroHub
           </h1>
-          <p style={{ color: theme.colors.textMuted, fontSize: theme.typography.size.sm, marginTop: '4px' }}>
+          <p style={{
+            color: theme.colors.textMuted,
+            fontSize: theme.typography.sizes.sm,
+          }}>
             Gratis · Sin tarjeta de crédito
           </p>
         </div>
@@ -64,12 +70,15 @@ export default function Signup() {
 
         <p style={{
           textAlign: 'center',
-          marginTop: '24px',
-          fontSize: theme.typography.size.sm,
+          marginTop: theme.spacing.lg,
+          fontSize: theme.typography.sizes.sm,
           color: theme.colors.textMuted,
         }}>
           ¿Ya tienes cuenta?{' '}
-          <Link to="/login" style={{ color: theme.colors.primary, fontWeight: theme.typography.weight.semibold }}>
+          <Link to="/login" style={{
+            color: theme.colors.primary,
+            fontWeight: theme.typography.weights.semibold,
+          }}>
             Inicia sesión
           </Link>
         </p>

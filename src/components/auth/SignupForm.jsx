@@ -3,11 +3,13 @@ import Button from '../common/Button'
 
 const estiloInput = {
   width: '100%',
-  padding: '12px 16px',
-  border: `2px solid ${theme.colors.border}`,
-  borderRadius: theme.radius.md,
-  fontSize: theme.typography.size.base,
+  padding: '11px 14px',
+  border: `1.5px solid ${theme.colors.border}`,
+  borderRadius: theme.borderRadius.md,
+  fontSize: theme.typography.sizes.base,
   fontFamily: theme.typography.fontFamily,
+  color: theme.colors.textPrimary,
+  background: theme.colors.white,
   outline: 'none',
   transition: `border-color ${theme.transition.fast}`,
 }
@@ -25,38 +27,76 @@ export default function SignupForm({ onSubmit, cargando = false, error = null })
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.lg }}>
       {error && (
         <p style={{
-          color: theme.colors.error,
-          background: theme.colors.errorBg,
-          padding: '12px 16px',
-          borderRadius: theme.radius.md,
-          fontSize: theme.typography.size.sm,
+          color: theme.colors.semantic.error,
+          background: theme.colors.semantic.errorBg,
+          padding: `${theme.spacing.sm} ${theme.spacing.md}`,
+          borderRadius: theme.borderRadius.md,
+          fontSize: theme.typography.sizes.sm,
+          border: `1px solid ${theme.colors.semantic.errorBorder}`,
         }}>
           {error}
         </p>
       )}
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-        <label style={{ fontSize: theme.typography.size.sm, fontWeight: theme.typography.weight.medium }}>
+        <label style={{
+          fontSize: theme.typography.sizes.xs,
+          fontWeight: theme.typography.weights.semibold,
+          color: theme.colors.textMuted,
+          textTransform: 'uppercase',
+          letterSpacing: theme.typography.letterSpacing.widest,
+        }}>
           Nombre completo
         </label>
-        <input type="text" name="nombre" required placeholder="María García" style={estiloInput} />
+        <input
+          type="text"
+          name="nombre"
+          required
+          placeholder="María García"
+          style={estiloInput}
+        />
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-        <label style={{ fontSize: theme.typography.size.sm, fontWeight: theme.typography.weight.medium }}>
+        <label style={{
+          fontSize: theme.typography.sizes.xs,
+          fontWeight: theme.typography.weights.semibold,
+          color: theme.colors.textMuted,
+          textTransform: 'uppercase',
+          letterSpacing: theme.typography.letterSpacing.widest,
+        }}>
           Email
         </label>
-        <input type="email" name="email" required placeholder="tu@email.com" style={estiloInput} />
+        <input
+          type="email"
+          name="email"
+          required
+          placeholder="tu@email.com"
+          style={estiloInput}
+        />
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-        <label style={{ fontSize: theme.typography.size.sm, fontWeight: theme.typography.weight.medium }}>
+        <label style={{
+          fontSize: theme.typography.sizes.xs,
+          fontWeight: theme.typography.weights.semibold,
+          color: theme.colors.textMuted,
+          textTransform: 'uppercase',
+          letterSpacing: theme.typography.letterSpacing.widest,
+        }}>
           Contraseña
         </label>
-        <input type="password" name="password" required placeholder="Mínimo 8 caracteres" minLength={8} style={estiloInput} />
+        <input
+          type="password"
+          name="password"
+          required
+          placeholder="Mínimo 8 caracteres"
+          minLength={8}
+          style={estiloInput}
+        />
       </div>
 
       <Button type="submit" variante="primary" tamano="lg" fullWidth cargando={cargando}>

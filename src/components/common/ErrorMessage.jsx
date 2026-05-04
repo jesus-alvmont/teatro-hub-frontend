@@ -18,10 +18,9 @@ export default function ErrorMessage({ mensaje, onReintentar }) {
         textAlign: 'center',
       }}
     >
-      <span style={{ fontSize: theme.typography.sizes['3xl'] }}>⚠️</span>
       <p style={{
         color: theme.colors.semantic.error,
-        fontWeight: theme.typography.weights.medium,
+        fontWeight: theme.typography.weights.semibold,
         fontSize: theme.typography.sizes.base,
       }}>
         {mensaje}
