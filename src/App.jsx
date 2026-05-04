@@ -5,17 +5,54 @@ import { AppProvider } from './context/AppContext'
 import Header from './components/common/Header'
 import Footer from './components/common/Footer'
 import LoadingSpinner from './components/common/LoadingSpinner'
+import theme from './styles/theme'
 
 // Lazy loading por ruta — solo se carga el JS cuando se navega a la página
-const Home          = lazy(() => import('./pages/Home'))
-const TallerDetail  = lazy(() => import('./pages/TallerDetail'))
+const Home           = lazy(() => import('./pages/Home'))
+const TallerDetail   = lazy(() => import('./pages/TallerDetail'))
 const ProfesorDetail = lazy(() => import('./pages/ProfesorDetail'))
-const Login         = lazy(() => import('./pages/Login'))
-const Signup        = lazy(() => import('./pages/Signup'))
-const Dashboard     = lazy(() => import('./pages/Dashboard'))
+const Login          = lazy(() => import('./pages/Login'))
+const Signup         = lazy(() => import('./pages/Signup'))
+const Dashboard      = lazy(() => import('./pages/Dashboard'))
+
+// Página de referencia visual del Design System (solo desarrollo)
+const DesignSystemDemo = lazy(() => import('./components/common/DesignSystemDemo'))
 
 // Fallback de carga compartido para todas las rutas
 const CargandoPagina = () => <LoadingSpinner fullPage mensaje="Cargando página…" />
+
+// Página 404 en línea — sustituir por página dedicada en Semana 2
+function PaginaNoEncontrada() {
+  return (
+    <div style={{
+      textAlign: 'center',
+      padding: `${theme.spacing['4xl']} ${theme.spacing.lg}`,
+      flex: 1,
+    }}>
+      <span style={{
+        fontSize: theme.typography.sizes['5xl'],
+        display: 'block',
+        marginBottom: theme.spacing.md,
+      }}>
+        🎭
+      </span>
+      <h2 style={{
+        fontFamily: theme.typography.fontFamilyDisplay,
+        fontSize: theme.typography.sizes['2xl'],
+        color: theme.colors.textPrimary,
+        marginBottom: theme.spacing.sm,
+      }}>
+        Página no encontrada
+      </h2>
+      <p style={{
+        fontSize: theme.typography.sizes.base,
+        color: theme.colors.textSecondary,
+      }}>
+        El telón aún no ha subido en esta dirección.
+      </p>
+    </div>
+  )
+}
 
 export default function App() {
   return (
@@ -27,20 +64,14 @@ export default function App() {
 
             <Suspense fallback={<CargandoPagina />}>
               <Routes>
-                <Route path="/"             element={<Home />} />
-                <Route path="/taller/:id"   element={<TallerDetail />} />
-                <Route path="/profesor/:id" element={<ProfesorDetail />} />
-                <Route path="/login"        element={<Login />} />
-                <Route path="/signup"       element={<Signup />} />
-                <Route path="/dashboard"    element={<Dashboard />} />
-
-                {/* 404 — Semana 2: crear página NotFound dedicada */}
-                <Route path="*" element={
-                  <div style={{ textAlign: 'center', padding: '96px 24px' }}>
-                    <span style={{ fontSize: '4rem', display: 'block', marginBottom: '16px' }}>🎭</span>
-                    <h2>Página no encontrada</h2>
-                  </div>
-                } />
+                <Route path="/"              element={<Home />} />
+                <Route path="/taller/:id"    element={<TallerDetail />} />
+                <Route path="/profesor/:id"  element={<ProfesorDetail />} />
+                <Route path="/login"         element={<Login />} />
+                <Route path="/signup"        element={<Signup />} />
+                <Route path="/dashboard"     element={<Dashboard />} />
+                <Route path="/design-system" element={<DesignSystemDemo />} />
+                <Route path="*"              element={<PaginaNoEncontrada />} />
               </Routes>
             </Suspense>
 

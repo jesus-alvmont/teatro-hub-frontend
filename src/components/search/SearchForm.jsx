@@ -6,15 +6,17 @@ import { NIVELES, TIPOS_TALLER } from '../../utils/constants'
 const estiloSelect = {
   width: '100%',
   padding: '10px 14px',
-  border: `2px solid ${theme.colors.border}`,
-  borderRadius: theme.radius.md,
-  fontSize: theme.typography.size.sm,
+  border: `1.5px solid ${theme.colors.border}`,
+  borderRadius: theme.borderRadius.md,
+  fontSize: theme.typography.sizes.sm,
   color: theme.colors.textPrimary,
   background: theme.colors.surface,
   outline: 'none',
   fontFamily: theme.typography.fontFamily,
   transition: `border-color ${theme.transition.fast}`,
   cursor: 'pointer',
+  appearance: 'none',
+  WebkitAppearance: 'none',
 }
 
 // Campo de formulario con etiqueta
@@ -22,11 +24,11 @@ function Campo({ label, children }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
       <label style={{
-        fontSize: theme.typography.size.xs,
-        fontWeight: theme.typography.weight.semibold,
+        fontSize: theme.typography.sizes.xs,
+        fontWeight: theme.typography.weights.semibold,
         color: theme.colors.textSecondary,
         textTransform: 'uppercase',
-        letterSpacing: '0.5px',
+        letterSpacing: theme.typography.letterSpacing.wider,
       }}>
         {label}
       </label>
@@ -64,17 +66,17 @@ export default function SearchForm({ distritos = [], cargando = false, onBuscar 
       onSubmit={handleSubmit}
       style={{
         background: theme.colors.surface,
-        borderRadius: theme.radius.xl,
-        padding: '24px',
-        boxShadow: theme.shadow.lg,
-        border: `1px solid ${theme.colors.border}`,
+        borderRadius: theme.borderRadius.xl,
+        padding: theme.spacing.lg,
+        boxShadow: theme.shadow.xl,
+        border: `1px solid ${theme.colors.borderSubtle}`,
       }}
     >
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-        gap: '16px',
-        marginBottom: '20px',
+        gap: theme.spacing.md,
+        marginBottom: theme.spacing.lg,
       }}>
         <Campo label="Distrito">
           <select name="distrito" value={filtros.distrito} onChange={handleChange} style={estiloSelect}>
@@ -110,7 +112,7 @@ export default function SearchForm({ distritos = [], cargando = false, onBuscar 
         </Campo>
       </div>
 
-      <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
+      <div style={{ display: 'flex', gap: theme.spacing.sm, justifyContent: 'flex-end' }}>
         {hayFiltros && (
           <Button variante="ghost" tamano="md" onClick={handleLimpiar} type="button">
             Limpiar

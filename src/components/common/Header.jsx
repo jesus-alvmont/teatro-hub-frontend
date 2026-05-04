@@ -16,8 +16,10 @@ export default function Header() {
 
   const estiloEnlace = ({ isActive }) => ({
     color: isActive ? theme.colors.primary : theme.colors.textSecondary,
-    fontWeight: isActive ? theme.typography.weight.semibold : theme.typography.weight.medium,
-    fontSize: theme.typography.size.sm,
+    fontWeight: isActive
+      ? theme.typography.weights.semibold
+      : theme.typography.weights.medium,
+    fontSize: theme.typography.sizes.sm,
     transition: `color ${theme.transition.fast}`,
     textDecoration: 'none',
   })
@@ -28,7 +30,7 @@ export default function Header() {
       borderBottom: `1px solid ${theme.colors.border}`,
       position: 'sticky',
       top: 0,
-      zIndex: 100,
+      zIndex: theme.zIndex.sticky,
       boxShadow: theme.shadow.sm,
     }}>
       <div className="container" style={{
@@ -39,11 +41,12 @@ export default function Header() {
       }}>
         {/* Logo */}
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
-          <span style={{ fontSize: '1.5rem' }}>🎭</span>
+          <span style={{ fontSize: theme.typography.sizes.xl }}>🎭</span>
           <span style={{
-            fontSize: theme.typography.size.xl,
-            fontWeight: theme.typography.weight.bold,
-            background: theme.colors.gradient,
+            fontFamily: theme.typography.fontFamilyDisplay,
+            fontSize: theme.typography.sizes.xl,
+            fontWeight: theme.typography.weights.bold,
+            background: theme.colors.gradientWarm,
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
@@ -53,35 +56,37 @@ export default function Header() {
         </Link>
 
         {/* Navegación escritorio */}
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
+        <nav style={{ display: 'flex', alignItems: 'center', gap: theme.spacing.xl }}>
           <NavLink to="/" style={estiloEnlace} end>Inicio</NavLink>
           <NavLink to="/talleres" style={estiloEnlace}>Talleres</NavLink>
         </nav>
 
         {/* Acciones de usuario */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: theme.spacing.sm }}>
           {estaAutenticado ? (
             <>
               <Link
                 to="/dashboard"
                 style={{
-                  display: 'flex', alignItems: 'center', gap: '8px',
+                  display: 'flex', alignItems: 'center', gap: theme.spacing.sm,
                   textDecoration: 'none', color: theme.colors.textPrimary,
-                  fontWeight: theme.typography.weight.medium,
-                  fontSize: theme.typography.size.sm,
+                  fontWeight: theme.typography.weights.medium,
+                  fontSize: theme.typography.sizes.sm,
                 }}
               >
+                {/* Avatar con inicial del usuario */}
                 <span style={{
                   width: '32px', height: '32px',
-                  borderRadius: '50%',
+                  borderRadius: theme.borderRadius.full,
                   background: theme.colors.gradient,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: '#fff', fontWeight: theme.typography.weight.bold,
-                  fontSize: theme.typography.size.sm,
+                  color: theme.colors.white,
+                  fontWeight: theme.typography.weights.bold,
+                  fontSize: theme.typography.sizes.sm,
+                  boxShadow: theme.shadow.primary,
                 }}>
                   {usuario?.nombre?.charAt(0).toUpperCase() ?? 'U'}
                 </span>
-                <span style={{ display: 'none' }}>{usuario?.nombre}</span>
               </Link>
               <Button variante="ghost" tamano="sm" onClick={handleLogout}>
                 Salir

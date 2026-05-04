@@ -10,19 +10,19 @@ export default function ErrorMessage({ mensaje, onReintentar }) {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: '16px',
-        padding: '32px',
-        background: theme.colors.errorBg,
-        border: `1px solid ${theme.colors.error}33`,
-        borderRadius: theme.radius.lg,
+        gap: theme.spacing.md,
+        padding: theme.spacing.xl,
+        background: theme.colors.semantic.errorBg,
+        border: `1px solid ${theme.colors.semantic.errorBorder}`,
+        borderRadius: theme.borderRadius.lg,
         textAlign: 'center',
       }}
     >
-      <span style={{ fontSize: '2rem' }}>⚠️</span>
+      <span style={{ fontSize: theme.typography.sizes['3xl'] }}>⚠️</span>
       <p style={{
-        color: theme.colors.error,
-        fontWeight: theme.typography.weight.medium,
-        fontSize: theme.typography.size.base,
+        color: theme.colors.semantic.error,
+        fontWeight: theme.typography.weights.medium,
+        fontSize: theme.typography.sizes.base,
       }}>
         {mensaje}
       </p>

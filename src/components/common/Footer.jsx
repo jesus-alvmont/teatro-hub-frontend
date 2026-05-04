@@ -6,49 +6,74 @@ export default function Footer() {
 
   return (
     <footer style={{
-      background: theme.colors.textPrimary,
+      background: theme.colors.black,
       color: theme.colors.textMuted,
       marginTop: 'auto',
     }}>
       <div className="container" style={{
-        padding: '40px 24px',
+        padding: `${theme.spacing['2xl']} ${theme.spacing.lg}`,
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-        gap: '32px',
+        gap: theme.spacing.xl,
       }}>
         {/* Marca */}
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-            <span style={{ fontSize: '1.25rem' }}>🎭</span>
+          <div style={{
+            display: 'flex', alignItems: 'center',
+            gap: theme.spacing.sm,
+            marginBottom: theme.spacing.sm,
+          }}>
+            <span style={{ fontSize: theme.typography.sizes.xl }}>🎭</span>
             <span style={{
-              color: '#fff',
-              fontWeight: theme.typography.weight.bold,
-              fontSize: theme.typography.size.lg,
+              fontFamily: theme.typography.fontFamilyDisplay,
+              color: theme.colors.white,
+              fontWeight: theme.typography.weights.bold,
+              fontSize: theme.typography.sizes.lg,
+              background: theme.colors.gradientWarm,
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
             }}>
               TeatroHub
             </span>
           </div>
-          <p style={{ fontSize: theme.typography.size.sm, lineHeight: '1.7' }}>
+          <p style={{
+            fontSize: theme.typography.sizes.sm,
+            lineHeight: theme.typography.lineHeights.relaxed,
+          }}>
             Descubre y reserva talleres de teatro en Madrid.
           </p>
         </div>
 
         {/* Links */}
         <div>
-          <h4 style={{ color: '#fff', marginBottom: '16px', fontSize: theme.typography.size.sm, fontWeight: theme.typography.weight.semibold }}>
+          <h4 style={{
+            color: theme.colors.white,
+            marginBottom: theme.spacing.md,
+            fontSize: theme.typography.sizes.sm,
+            fontWeight: theme.typography.weights.semibold,
+            letterSpacing: theme.typography.letterSpacing.wider,
+            textTransform: 'uppercase',
+          }}>
             Plataforma
           </h4>
           <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            {[['/', 'Inicio'], ['/talleres', 'Talleres'], ['/signup', 'Regístrate']].map(([ruta, etiqueta]) => (
+            {[
+              ['/', 'Inicio'],
+              ['/talleres', 'Talleres'],
+              ['/signup', 'Regístrate'],
+            ].map(([ruta, etiqueta]) => (
               <li key={ruta}>
-                <Link to={ruta} style={{
-                  color: theme.colors.textMuted,
-                  fontSize: theme.typography.size.sm,
-                  textDecoration: 'none',
-                  transition: `color ${theme.transition.fast}`,
-                }}
-                onMouseEnter={e => e.target.style.color = '#fff'}
-                onMouseLeave={e => e.target.style.color = theme.colors.textMuted}
+                <Link
+                  to={ruta}
+                  style={{
+                    color: theme.colors.textMuted,
+                    fontSize: theme.typography.sizes.sm,
+                    textDecoration: 'none',
+                    transition: `color ${theme.transition.fast}`,
+                  }}
+                  onMouseEnter={e => e.target.style.color = theme.colors.accent}
+                  onMouseLeave={e => e.target.style.color = theme.colors.textMuted}
                 >
                   {etiqueta}
                 </Link>
@@ -61,9 +86,10 @@ export default function Footer() {
       {/* Copyright */}
       <div style={{
         borderTop: `1px solid rgba(255,255,255,0.08)`,
-        padding: '20px 24px',
+        padding: `${theme.spacing.lg} ${theme.spacing.lg}`,
         textAlign: 'center',
-        fontSize: theme.typography.size.xs,
+        fontSize: theme.typography.sizes.xs,
+        color: theme.colors.grayLight,
       }}>
         <div className="container">
           © {anio} TeatroHub · Hecho con ❤️ en Madrid

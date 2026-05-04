@@ -4,34 +4,38 @@ import Card from '../common/Card'
 import Badge from '../common/Badge'
 import { formatPrecio, truncarTexto, calcularOcupacion } from '../../utils/helpers'
 
-// Barra de progreso para ocupación de plazas
+// Barra de ocupación de plazas con color semántico según el nivel de llenado
 function BarraOcupacion({ disponibles, total }) {
   const { porcentaje } = calcularOcupacion(disponibles, total)
-  const color = porcentaje >= 90
-    ? theme.colors.error
+
+  const colorBarra = porcentaje >= 90
+    ? theme.colors.semantic.error
     : porcentaje >= 70
-      ? theme.colors.warning
-      : theme.colors.success
+      ? theme.colors.semantic.warning
+      : theme.colors.semantic.success
 
   return (
     <div>
       <div style={{
         display: 'flex', justifyContent: 'space-between',
-        fontSize: theme.typography.size.xs,
+        fontSize: theme.typography.sizes.xs,
         color: theme.colors.textMuted,
-        marginBottom: '4px',
+        marginBottom: theme.spacing.xs,
       }}>
         <span>{disponibles} plazas disponibles</span>
         <span>{porcentaje}% ocupado</span>
       </div>
       <div style={{
-        height: '4px', borderRadius: theme.radius.full,
-        background: theme.colors.border, overflow: 'hidden',
+        height: '4px',
+        borderRadius: theme.borderRadius.full,
+        background: theme.colors.border,
+        overflow: 'hidden',
       }}>
         <div style={{
-          height: '100%', width: `${porcentaje}%`,
-          background: color,
-          borderRadius: theme.radius.full,
+          height: '100%',
+          width: `${porcentaje}%`,
+          background: colorBarra,
+          borderRadius: theme.borderRadius.full,
           transition: 'width 0.5s ease',
         }} />
       </div>
@@ -49,58 +53,68 @@ export default function TallerCard({ taller }) {
   } = taller
 
   return (
-    <Card hover onClick={() => navigate(`/taller/${id}`)} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      {/* Cabecera con color de nivel */}
+    <Card
+      hover
+      onClick={() => navigate(`/taller/${id}`)}
+      style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.md }}
+    >
+      {/* Franja superior de color de marca */}
       <div style={{
-        height: '6px',
-        borderRadius: `${theme.radius.md} ${theme.radius.md} 0 0`,
-        background: theme.colors.gradient,
-        margin: '-24px -24px 0',
+        height: '5px',
+        borderRadius: `${theme.borderRadius.lg} ${theme.borderRadius.lg} 0 0`,
+        background: theme.colors.gradientWarm,
+        margin: `-${theme.spacing.lg} -${theme.spacing.lg} 0`,
       }} />
 
       {/* Título y badges */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
         <h3 style={{
-          fontSize: theme.typography.size.lg,
-          fontWeight: theme.typography.weight.semibold,
+          fontFamily: theme.typography.fontFamilyDisplay,
+          fontSize: theme.typography.sizes.lg,
+          fontWeight: theme.typography.weights.bold,
           color: theme.colors.textPrimary,
-          lineHeight: '1.3',
+          lineHeight: theme.typography.lineHeights.snug,
         }}>
           {nombre}
         </h3>
-        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+
+        <div style={{ display: 'flex', gap: theme.spacing.sm, flexWrap: 'wrap' }}>
           {nivel && <Badge nivel={nivel} />}
-          <Badge color="info" size="sm">📍 {ubicacion_distrito}</Badge>
+          {/* Ubicación con color secundario (verde salvia) */}
+          <Badge color="secondary" size="sm">📍 {ubicacion_distrito}</Badge>
         </div>
       </div>
 
       {/* Descripción */}
       <p style={{
-        fontSize: theme.typography.size.sm,
+        fontSize: theme.typography.sizes.sm,
         color: theme.colors.textSecondary,
-        lineHeight: '1.6',
+        lineHeight: theme.typography.lineHeights.relaxed,
         flex: 1,
       }}>
         {truncarTexto(descripcion)}
       </p>
 
-      {/* Ocupación */}
+      {/* Barra de ocupación */}
       <BarraOcupacion disponibles={plazas_disponibles} total={plazas_total} />
 
-      {/* Precio */}
+      {/* Precio en dorado (accent) como destacado */}
       <div style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        paddingTop: '12px',
-        borderTop: `1px solid ${theme.colors.border}`,
+        paddingTop: theme.spacing.sm,
+        borderTop: `1px solid ${theme.colors.borderSubtle}`,
       }}>
         <span style={{
-          fontSize: theme.typography.size['2xl'],
-          fontWeight: theme.typography.weight.bold,
-          color: theme.colors.primary,
+          fontSize: theme.typography.sizes['2xl'],
+          fontWeight: theme.typography.weights.bold,
+          color: theme.colors.accent,
         }}>
           {formatPrecio(precio_mensual)}
         </span>
-        <span style={{ fontSize: theme.typography.size.xs, color: theme.colors.textMuted }}>
+        <span style={{
+          fontSize: theme.typography.sizes.xs,
+          color: theme.colors.textMuted,
+        }}>
           por mes
         </span>
       </div>
