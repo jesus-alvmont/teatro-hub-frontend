@@ -1,43 +1,114 @@
-/* Fuente Inter desde Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/* Fuentes — Inter (UI) + Playfair Display (títulos) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap');
 
-/* ── Variables CSS globales ─────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════════════════════════════
+   VARIABLES CSS — Design System TeatroHub
+   Paleta: Rojo Coral · Verde Salvia · Amarillo Dorado
+   ══════════════════════════════════════════════════════════════════════════════ */
 :root {
-  --color-primary:       #7c3aed;
-  --color-primary-light: #8b5cf6;
-  --color-primary-dark:  #5b21b6;
-  --color-primary-xl:    #ede9fe;
-  --color-accent:        #aa3bff;
-  --color-gradient:      linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* Primario — Rojo Coral */
+  --color-primary:        #E74C3C;
+  --color-primary-light:  #EE6B5E;
+  --color-primary-dark:   #C0392B;
+  --color-primary-xl:     #FDECEA;
 
-  --color-bg:         #f8f7ff;
-  --color-surface:    #ffffff;
-  --color-text:       #1a1a2e;
-  --color-text-sec:   #4a4a6a;
-  --color-text-muted: #9ca3af;
-  --color-border:     #e2e0f0;
+  /* Secundario — Verde Salvia */
+  --color-secondary:       #6B8C7E;
+  --color-secondary-light: #8AA89C;
+  --color-secondary-dark:  #4F6E61;
+  --color-secondary-xl:    #EBF2EF;
 
-  --color-success: #10b981;
-  --color-error:   #ef4444;
-  --color-warning: #f59e0b;
+  /* Accent — Amarillo Dorado */
+  --color-accent:          #D4AF37;
+  --color-accent-bright:   #F4D03F;
+  --color-accent-dark:     #B8960C;
+  --color-accent-xl:       #FDF9E7;
 
-  --shadow-sm:  0 1px 3px rgba(0,0,0,0.08);
-  --shadow-md:  0 4px 6px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.04);
-  --shadow-lg:  0 10px 25px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
-  --shadow-primary: 0 8px 25px rgba(124, 58, 237, 0.3);
+  /* Fondos suaves por familia */
+  --color-bg:              #FFF8F6;
+  --color-bg-sage:         #F5F9F7;
+  --color-bg-gold:         #FFFAF5;
 
-  --radius-sm:  4px;
-  --radius-md:  8px;
-  --radius-lg:  12px;
-  --radius-xl:  16px;
+  /* Superficies */
+  --color-surface:         #FFFFFF;
+  --color-surface-hover:   #FFF8F6;
+  --color-overlay:         rgba(26, 26, 26, 0.5);
+
+  /* Neutrales */
+  --color-black:           #1A1A1A;
+  --color-gray:            #666666;
+  --color-gray-light:      #999999;
+  --color-gray-xl:         #CCCCCC;
+  --color-beige:           #F5F1E8;
+  --color-white:           #FFFFFF;
+
+  /* Texto */
+  --color-text:            #1A1A1A;
+  --color-text-sec:        #666666;
+  --color-text-muted:      #999999;
+  --color-text-inverse:    #FFFFFF;
+
+  /* Bordes */
+  --color-border:          #E8E3DA;
+  --color-border-focus:    #E74C3C;
+  --color-border-subtle:   #F0EBE3;
+
+  /* Gradientes */
+  --gradient-primary:  linear-gradient(135deg, #E74C3C 0%, #C0392B 100%);
+  --gradient-warm:     linear-gradient(135deg, #E74C3C 0%, #D4AF37 100%);
+  --gradient-sage:     linear-gradient(135deg, #6B8C7E 0%, #4F6E61 100%);
+  --gradient-subtle:   linear-gradient(135deg, #FFF8F6 0%, #FDF9E7 100%);
+  --gradient-hero:     linear-gradient(160deg, #1A1A1A 0%, #2D1F1F 50%, #3D2B1F 100%);
+
+  /* Semánticos */
+  --color-success:        #2E7D32;
+  --color-success-bg:     #E8F5E9;
+  --color-error:          #C62828;
+  --color-error-bg:       #FFEBEE;
+  --color-warning:        #E65100;
+  --color-warning-bg:     #FFF3E0;
+  --color-info:           #1565C0;
+  --color-info-bg:        #E3F2FD;
+
+  /* Sombras */
+  --shadow-xs: 0 1px 2px rgba(26,26,26,0.06);
+  --shadow-sm: 0 1px 4px rgba(26,26,26,0.08);
+  --shadow-md: 0 4px 12px rgba(26,26,26,0.08), 0 1px 4px rgba(26,26,26,0.04);
+  --shadow-lg: 0 8px 24px rgba(26,26,26,0.10), 0 2px 8px rgba(26,26,26,0.05);
+  --shadow-xl: 0 16px 40px rgba(26,26,26,0.12), 0 4px 12px rgba(26,26,26,0.06);
+  --shadow-primary:   0 8px 24px rgba(231,76,60,0.30);
+  --shadow-secondary: 0 8px 24px rgba(107,140,126,0.25);
+  --shadow-accent:    0 8px 24px rgba(212,175,55,0.30);
+
+  /* Radios */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-2xl:  24px;
   --radius-full: 9999px;
 
-  --font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --transition: 250ms ease;
-  --transition-fast: 150ms ease;
+  /* Tipografía */
+  --font:         'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Playfair Display', 'Georgia', serif;
+
+  /* Transiciones */
+  --transition:        250ms ease;
+  --transition-fast:   150ms ease;
+  --transition-slow:   400ms ease;
+  --transition-bounce: 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Espaciado base */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
 }
 
-/* ── Reset ──────────────────────────────────────────────────────── */
+/* ── Reset ──────────────────────────────────────────────────────────────────── */
 *,
 *::before,
 *::after {
@@ -49,6 +120,8 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -66,46 +139,57 @@ body {
   flex-direction: column;
 }
 
-img { max-width: 100%; height: auto; display: block; }
-a   { color: var(--color-primary); text-decoration: none; }
+img    { max-width: 100%; height: auto; display: block; }
+a      { color: var(--color-primary); text-decoration: none; }
 a:hover { text-decoration: underline; }
-button { font-family: var(--font); cursor: pointer; border: none; }
+button { font-family: var(--font); cursor: pointer; border: none; background: none; }
 
-/* ── Layout ─────────────────────────────────────────────────────── */
+/* ── Layout ─────────────────────────────────────────────────────────────────── */
 .container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 var(--space-lg);
 }
 
 @media (max-width: 768px) {
-  .container { padding: 0 16px; }
+  .container { padding: 0 var(--space-md); }
 }
 
-/* ── Utilidades ─────────────────────────────────────────────────── */
+/* ── Tipografía de display ──────────────────────────────────────────────────── */
+.font-display { font-family: var(--font-display); }
+
+/* ── Utilidades de accesibilidad ─────────────────────────────────────────────── */
 .sr-only {
   position: absolute;
   width: 1px; height: 1px;
   padding: 0; margin: -1px;
   overflow: hidden;
-  clip: rect(0,0,0,0);
+  clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
 }
 
-/* ── Hover states para componentes interactivos ─────────────────── */
+/* ── Componentes de interacción ──────────────────────────────────────────────── */
+
+/* Tarjeta con hover */
 .th-card-hover {
-  transition: transform var(--transition), box-shadow var(--transition);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
 }
 .th-card-hover:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
 }
 
+/* Botón con hover */
 .th-btn-hover {
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast),
-              background-color var(--transition-fast), opacity var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background-color var(--transition-fast),
+    opacity var(--transition-fast);
 }
 .th-btn-hover:hover:not(:disabled) {
   transform: translateY(-1px);
@@ -113,26 +197,74 @@ button { font-family: var(--font); cursor: pointer; border: none; }
 }
 .th-btn-hover:active:not(:disabled) {
   transform: translateY(0);
+  box-shadow: none;
 }
 .th-btn-hover:disabled {
   opacity: 0.55;
   cursor: not-allowed;
 }
 
-/* ── Animación de entrada ───────────────────────────────────────── */
+/* Focus visible global para accesibilidad */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Animaciones ─────────────────────────────────────────────────────────────── */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.animate-in {
-  animation: fadeInUp 0.35s ease both;
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
-/* ── Scrollbar personalizado (Webkit) ───────────────────────────── */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb {
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-in        { animation: fadeInUp 0.35s ease both; }
+.animate-fade      { animation: fadeIn 0.25s ease both; }
+.animate-scale     { animation: scaleIn 0.25s ease both; }
+.animate-spin      { animation: spin 0.7s linear infinite; }
+
+/* Skeleton loader */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-beige) 25%,
+    var(--color-border-subtle) 50%,
+    var(--color-beige) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+
+/* ── Scrollbar personalizado (Webkit) ────────────────────────────────────────── */
+::-webkit-scrollbar        { width: 6px; height: 6px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  {
   background: var(--color-border);
   border-radius: var(--radius-full);
 }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-primary-light); }
+
+/* ── Selección de texto ──────────────────────────────────────────────────────── */
+::selection {
+  background: var(--color-primary-xl);
+  color: var(--color-primary-dark);
+}

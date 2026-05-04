@@ -14,14 +14,14 @@ export const calcularOcupacion = (disponibles, total) => ({
   porcentaje: Math.round(((total - disponibles) / total) * 100),
 })
 
-// Devuelve el color asociado a cada nivel de dificultad
+// Devuelve el color asociado a cada nivel de dificultad (paleta TeatroHub)
 export const colorPorNivel = (nivel) => {
   const mapa = {
-    principiante: '#10b981',
-    intermedio: '#f59e0b',
-    avanzado: '#ef4444',
+    principiante: '#2E7D32',
+    intermedio: '#E65100',
+    avanzado: '#C62828',
   }
-  return mapa[nivel] ?? '#8b5cf6'
+  return mapa[nivel] ?? '#6B8C7E'
 }
 
 // Trunca texto largo con puntos suspensivos
